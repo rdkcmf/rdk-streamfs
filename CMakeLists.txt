@@ -36,8 +36,6 @@ CHECK_FILE_OFFSET_BITS()
 # fuse defines
 ADD_DEFINITIONS(-D_FILE_OFFSET_BITS=64)
 
-find_package (Threads)
-
 set(PUBLIC_HEADERS
         export/streamfs/BufferConsumer.h
         export/streamfs/BufferPool.h
@@ -102,10 +100,10 @@ add_subdirectory(tests)
 # set(Boost_DEBUG 1)
 
 set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED OFF)
+set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
-find_package(Boost REQUIRED COMPONENTS thread filesystem chrono)
+find_package(Boost REQUIRED COMPONENTS filesystem chrono)
 
 find_package(FUSE REQUIRED)
 find_package(CURL REQUIRED)
@@ -122,23 +120,26 @@ add_dependencies(streamlink sampleplugin)
 
 target_link_libraries (sampleplugin
         ${Boost_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
         ${CURL_LIBRARIES}
+        pthread
+        boost_thread
         glog)
 
 target_link_libraries(buqu
         ${Boost_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
         ${CURL_LIBRARIES}
+        pthread
+        boost_thread
         glog
         )
 
 target_link_libraries (streamlink
         PUBLIC
         dl
-        ${CMAKE_THREAD_LIBS_INIT}
         ${FUSE_LIBRARIES}
         ${Boost_LIBRARIES}
+        pthread
+        boost_thread
         glog)
 
 
@@ -151,9 +152,9 @@ add_executable(streamfs main.cpp
 target_link_libraries (streamfs
         streamlink
         ${Boost_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
         ${FUSE_LIBRARIES}
-        streamlink
+        pthread
+        boost_thread
         )
 
 

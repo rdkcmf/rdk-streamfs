@@ -24,7 +24,7 @@ add_executable(
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 
-find_package(Boost COMPONENTS filesystem thread)
+find_package(Boost COMPONENTS filesystem)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 

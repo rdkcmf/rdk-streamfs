@@ -21,7 +21,7 @@
 #define STREAMLINK_SERVICEREQUEST_H
 
 
-#include <stdint-gcc.h>
+#include <stdint.h>
 #include <string>
 
 enum ServiceRequestEnum {
