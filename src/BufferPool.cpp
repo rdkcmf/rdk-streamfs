@@ -58,7 +58,9 @@ BufferPool<T>::~BufferPool() {
 
 template <typename T>
 void BufferPool<T>::enableReadThrottling(bool enable) {
+#ifdef BUFFER_CHUNK_READ_THROTTLING
     mThrottle->enableThrottling(enable);
+#endif
 }
 
 template<>
